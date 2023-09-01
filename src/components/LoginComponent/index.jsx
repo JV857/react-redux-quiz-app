@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { auth } from "./firebase-config";
+import { auth } from "../../assets/config";
 
 const LoginComponent = () => {
   const navigate = useNavigate();
