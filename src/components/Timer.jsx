@@ -3,12 +3,10 @@ import { useNavigate } from "react-router-dom";
 
 const CountDown = ({ hours = 0, minutes = 0, seconds = 0 }) => {
   const navigate = useNavigate();
-  const [paused, setPaused] = useState(false);
   const [over, setOver] = useState(false);
   const [[h, m, s], setTime] = useState([hours, minutes, seconds]);
 
   const tick = () => {
-    if (paused || over) return;
     if (h === 0 && m === 0 && s === 0) setOver(true);
     else if (m === 0 && s === 0) {
       setTime([h - 1, 59, 59]);
@@ -19,11 +17,11 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0 }) => {
     }
   };
 
-  const reset = () => {
-    setTime([parseInt(hours), parseInt(minutes), parseInt(seconds)]);
-    setPaused(false);
-    setOver(false);
-  };
+  // const reset = () => {
+  //   setTime([parseInt(hours), parseInt(minutes), parseInt(seconds)]);
+  //   setPaused(false);
+  //   setOver(false);
+  // };
 
   useEffect(() => {
     const timerID = setInterval(() => tick(), 1000);
@@ -34,7 +32,7 @@ const CountDown = ({ hours = 0, minutes = 0, seconds = 0 }) => {
     if (over) {
       navigate("/score");
     }
-  }, [over]);
+  }, [over, navigate]);
   return (
     <div className="timer_wrapper">
       <p className="timer_string">
